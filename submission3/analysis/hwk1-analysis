@@ -1,38 +1,18 @@
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata)
 
-data <- readRDS("data/output/full_ma_data.rds")
-summary(data)
-num_observations <- nrow(data)
-print(num_observations)
+full.ma.data <- readRDS('data/output/full_ma_data.rds')
+contract.service.area <- readRDS('data/output/contract_service_area.rds')
+ma.penetration.data <- readRDS('data/output/ma_penetration.rds')
+plan.premiums <- readRDS('data/output/plan_premiums.rds')
 
-num_plan_types <- length(unique(data$plan_type))
-cat("Number of different plan types", num_plan_types, "\n")
+plan.type.table <- full.ma.data %>% group_by(plan_type) %>% count() %>% arrange(-n)
+tot.obs <- as.numeric(count(full.ma.data %>% ungroup()))
+plan.type.year1 <- full.ma.data %>% group_by(plan_type, year) %>% count() %>% arrange(year, -n) %>% filter(plan_type!="NA")
+plan.type.year1 <- pivot_wider(plan.type.year1, names_from="year",values_from="n", names_prefix="Count_")
 
-plan_count_table <- data %>%
-  group_by(year, plan_type) %>%
-  summarise(plan_count = n()) %>%
-  pivot_wider(names_from = year, values_from = plan_count, values_fill = 0)
-
-# Print the table
-print(plan_count_table, n=27)
-
-filtered_data <- data %>%
-  filter(!(plan_type %in% c("SNP", "eghp") | grepl("^800", plan_type)))
-
-# Count of observations after exclusions
-num_observations_after_exclusions <- nrow(filtered_data)
-print(paste("Number of observations after exclusions: ", num_observations_after_exclusions))
-
-# Count of unique plan types after exclusions
-num_plan_types_after_exclusions <- length(unique(filtered_data$plan_type))
-print(paste("Number of different plan_types after exclusions: ", num_plan_types_after_exclusions))
-
-# Create a table of plan counts by year and plan type after exclusions
-plan_count_table_after_exclusions <- filtered_data %>%
-  group_by(year, plan_type) %>%
-  summarise(plan_count = n()) %>%
-  pivot_wider(names_from = year, values_from = plan_count, values_fill = 0)
-
-# Print the updated table
-print(plan_count_table_after_exclusions, n=27)
+final.plans <- full.ma.data %>%
+  filter(snp == "No" & eghp == "No" &
+           (planid < 800 | planid >= 900))
+plan.type.year2 <- final.plans %>% group_by(plan_type, year) %>% count() %>% arrange(year, -n)
+plan.type.year2 <- pivot_wider(plan.type.year2, names_from="year",values_from="n", names_prefix="Count_")
