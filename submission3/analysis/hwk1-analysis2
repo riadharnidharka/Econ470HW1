@@ -58,7 +58,7 @@ fig.avg.enrollment <- final.data %>%
     y="People",
     title=""
   ) + scale_y_continuous(labels=comma) +
-  theme_bw()
+  theme_bw() 
 
 fig.avg.premium <- prem.data %>% ungroup() %>% group_by(year) %>%
   ggplot(aes(x=as.factor(year),y=premium, group=1)) + 
@@ -68,7 +68,7 @@ fig.avg.premium <- prem.data %>% ungroup() %>% group_by(year) %>%
     y="Premium",
     title=""
   ) + scale_y_continuous(labels=comma) +
-  theme_bw()
+  theme_bw() 
 
 fig.percent.zero <- prem.data %>% ungroup() %>%
   mutate(prem_0=(premium==0),
@@ -82,5 +82,9 @@ fig.percent.zero <- prem.data %>% ungroup() %>%
     y="Percent",
     title=""
   ) + scale_y_continuous(labels=percent) +
-  theme_bw()
+  theme_bw() 
 
+rm(list=c("full.ma.data", "contract.service.area",
+           "ma.penetration.data", "plan.premiums", "final.plans",
+           "final.data.pen", "final.state","prem.data","final.data"))
+save.image("submission3/Hwk1_workspace2.Rdata")

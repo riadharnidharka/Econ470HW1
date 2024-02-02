@@ -1,6 +1,6 @@
 ---
 title: "Homework 1"
-subtitle: "Research Methods, Spring 2024"
+subtitle: "Research in Health Economics, Spring 2024"
 author: "Ria Dharnidharka"
 format:
   pdf:
@@ -23,10 +23,10 @@ pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, readr, readxl, hrbrthemes, 
 #| include: false
 #| eval: true
  
-load("Hwk1_workspace.Rdata")
+load("Hwk1_workspace2.Rdata")
 ```
-
 \newpage
+
 # Enrollment Data
 Answer the following based on the enrollment data:
 
@@ -42,8 +42,6 @@ There are 18 total different plan types.
 
 \newpage
 \noindent 3. Provide a table of the count of plans under each plan type in each year.<br>
-
-See @tbl-plans.
 
 ```{r} 
 #| echo: false
@@ -113,15 +111,16 @@ fig.percent.zero
 \vspace{.2in}
 \noindent 8. Why did we drop the "800-series" plans?<br>
 
-
+The 800-series plans may have been dropped because they are not in the average peron’s choice set, meaning they are not accessible to all Medicare Advantage enrollees due to them being Employer Group Waiver Plans. Since they are not available to all enrollees, we don’t want them reflected in our summary of MA enrollment.
 
 
 \newpage
 \noindent 9. Why do so many plans charge a $0 premium? What does that really mean to a beneficiary?<br>
 
-
+Many plans charge a $0 premium for a couple reasons, firstly that Medicare advantage plans try to attract beneficiaries by having (or appearing to have) lower upfront costs, with premiums being one of the biggest upfront costs. Another reason is that these plans might have higher deductibles and copays, and finally that the government sometimes subsidizes $0 premium plans. What this means for the beneficiary is that they still have to pay a premium for Part B, so they essentially are not paying an additional premium but will still have up front costs. 
 
 
 \newpage
 \noindent 10. Briefly describe your experience working with these data (just a few sentences). Tell me one thing you learned and one thing that really aggravated you.<br>
 
+I had a better experience working with the data the third time around, but still had setbacks here and there which made it a very long process. One thing I learned is how to work in a quarto file and the process of creating a pdf that pulls in data from our analysis. One thing that aggravated me is that I could not figure out how to edit the figures (such as font size on a graph) after saving the image and putting it in the Quarto file, which became an issue when I wanted to make some formatting changes. 
