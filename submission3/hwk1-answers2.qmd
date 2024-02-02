@@ -124,3 +124,6 @@ Many plans charge a $0 premium for a couple reasons, firstly that Medicare advan
 \noindent 10. Briefly describe your experience working with these data (just a few sentences). Tell me one thing you learned and one thing that really aggravated you.<br>
 
 I had a better experience working with the data the third time around, but still had setbacks here and there which made it a very long process. One thing I learned is how to work in a quarto file and the process of creating a pdf that pulls in data from our analysis. One thing that aggravated me is that I could not figure out how to edit the figures (such as font size on a graph) after saving the image and putting it in the Quarto file, which became an issue when I wanted to make some formatting changes. 
+
+Link to my Github Repository: 
+https://github.com/riadharnidharka/Econ470HW1/tree/master 
