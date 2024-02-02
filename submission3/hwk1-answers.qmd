@@ -1,0 +1,59 @@
+---
+title: "Homework 1"
+subtitle: "Research Methods, Spring 2024"
+author: "Ria Dharnidharka"
+format:
+  pdf:
+    output-file: "dharnidharka-r-hwk1-3"
+    output-ext:  "pdf"
+    header-includes:
+      - \usepackage{float}
+      - \floatplacement{table}{H}
+---
+```{r}
+#| include: false
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, readr, readxl, hrbrthemes, fixest,
+               scales, gganimate, gapminder, gifski, png, tufte, plotly, OECD,
+               ggrepel, survey, foreign, devtools, pdftools, kableExtra, modelsummary,
+               kableExtra)
+```
+```{r}
+#| include: false
+#| eval: true
+ 
+load("Hwk1_workspace.Rdata")
+```
+
+\newpage
+# Enrollment Data
+Answer the following based on the enrollment data:
+
+\vspace{.2in}
+\noindent 1. How many observations exist in your current dataset?<br>
+
+In the current dataset, there are 13,276,162 total observations. 
+
+\newpage
+\noindent 2. How many different *plan_types* exist in the data? <br>
+
+There are 18 total different plan types. 
+
+\newpage
+\noindent 3. Provide a table of the count of plans under each plan type in each year.<br>
+
+See @tbl-plans.
+
+```{r} 
+#| echo: false
+#| label: tbl-plans
+#| tbl-cap: "Plan types by year"
+
+options(knitr.kable.NA = 0)
+knitr::kable(plan.type.year1, 
+             col.names=c("Plan Type","2010","2011",
+                         "2012","2013","2014","2015"),
+             format.args=list(big.mark=","), booktabs = TRUE) %>%
+             kable_styling(latex_options=c("scale_down"))
+```
